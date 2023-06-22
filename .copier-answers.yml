@@ -16,7 +16,7 @@ tap_id: tap-betterstack
 tap_package_command_line_name: tap-betterstack
 tap_package_distribution_name: tap-betterstack
 tap_package_import_name: tap_betterstack
-tap_source_description: Platform for uptime tracking, indicident management and log
+tap_source_description: Platform for uptime tracking, incident management and log
     management
 tap_source_id: BetterStack
 tap_source_name: Better Stack
