@@ -18,8 +18,6 @@ Singer tap for [Better Stack](https://betterstack.com). Built with the [Meltano 
 
 </div
 
-Built with the [Meltano Singer SDK](https://sdk.meltano.com).
-
 ## Capabilities
 
 * `catalog`
