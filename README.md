@@ -61,10 +61,11 @@ A full list of supported settings and capabilities is available by running: `tap
 * [`status_pages`](https://betterstack.com/docs/uptime/api/list-all-existing-status-pages/)
 
 ### Planned (PRs welcome!)
-| [`status_page_sections`](https://betterstack.com/docs/uptime/api/list-existing-sections-of-a-status-page/)
-| [`status_page_resources`](https://betterstack.com/docs/uptime/api/list-existing-resources-of-a-status-page/)
-| [`status_page_reports`](https://betterstack.com/docs/uptime/api/list-existing-reports-on-a-status-page/)
-| [`status_page_report_updates`](https://betterstack.com/docs/uptime/api/list-all-existing-status-updates-for-a-status-page-report/)
+
+* [`status_page_sections`](https://betterstack.com/docs/uptime/api/list-existing-sections-of-a-status-page/)
+* [`status_page_resources`](https://betterstack.com/docs/uptime/api/list-existing-resources-of-a-status-page/)
+* [`status_page_reports`](https://betterstack.com/docs/uptime/api/list-existing-reports-on-a-status-page/)
+* [`status_page_report_updates`](https://betterstack.com/docs/uptime/api/list-all-existing-status-updates-for-a-status-page-report/)
 
 ## Usage
 
