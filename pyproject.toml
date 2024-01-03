@@ -1,13 +1,13 @@
 [build-system]
 build-backend = "poetry_dynamic_versioning.backend"
 requires = [
-  "poetry-core==1.6",
+  "poetry-core==1.8",
   "poetry-dynamic-versioning",
 ]
 
 [tool.poetry]
 name = "tap-betterstack"
-version = "0.0.1"
+version = "0.0.0"
 description = "`tap-betterstack` is a Singer tap for Better Stack, built with the Meltano SDK for Singer Taps."
 authors = ["Edgar Ramírez-Mondragón <edgarrm358@gmail.com>"]
 keywords = [
@@ -22,7 +22,7 @@ repository = "https://github.com/edgarrmondragon/tap-betterstack"
 documentation = "https://github.com/edgarrmondragon/tap-betterstack#readme"
 
 [tool.poetry.dependencies]
-python = ">=3.8,<4"
+python = ">=3.8"
 singer-sdk = "~=0.34.0"
 
 [tool.poetry.group.dev.dependencies]
