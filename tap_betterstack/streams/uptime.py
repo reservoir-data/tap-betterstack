@@ -12,6 +12,8 @@ from tap_betterstack.client import BetterStackStream
 if TYPE_CHECKING:
     from urllib.parse import ParseResult
 
+    from singer_sdk.helpers.types import Context
+
 __all__ = [
     "Monitors",
     "MonitorGroups",
@@ -284,7 +286,7 @@ class Incidents(BaseUptimeStream):
 
     def get_url_params(
         self,
-        context: dict | None,
+        context: Context | None,
         next_page_token: ParseResult | None,
     ) -> dict[str, Any]:
         """Return a dictionary of params to use in the API request."""
@@ -299,7 +301,7 @@ class Incidents(BaseUptimeStream):
     def get_child_context(
         self,
         record: dict,
-        context: dict | None,  # noqa: ARG002
+        context: Context | None,  # noqa: ARG002
     ) -> dict | None:
         """Return a child context for the given record."""
         return {"incident_id": record["id"]}

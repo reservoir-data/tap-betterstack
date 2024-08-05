@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from abc import ABCMeta, abstractproperty
+from abc import ABCMeta, abstractmethod
 from typing import TYPE_CHECKING, Any, ClassVar
 from urllib.parse import parse_qsl
 
@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from urllib.parse import ParseResult
 
     from requests import Response
+    from singer_sdk.helpers.types import Context
 
 
 class BetterStackPaginator(BaseHATEOASPaginator):
@@ -33,7 +34,8 @@ class BetterStackStream(RESTStream, metaclass=ABCMeta):
     next_page_token_jsonpath = "$.next_page"  # noqa: S105
     primary_keys: ClassVar[list[str]] = ["id"]
 
-    @abstractproperty
+    @property
+    @abstractmethod
     def url_base(self) -> str:
         """Product-specific base URL for API requests."""
         raise NotImplementedError
@@ -66,7 +68,7 @@ class BetterStackStream(RESTStream, metaclass=ABCMeta):
 
     def get_url_params(
         self,
-        context: dict | None,  # noqa: ARG002
+        context: Context | None,  # noqa: ARG002
         next_page_token: ParseResult | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
@@ -83,7 +85,7 @@ class BetterStackStream(RESTStream, metaclass=ABCMeta):
     def post_process(
         self,
         row: dict,
-        context: dict | None = None,  # noqa: ARG002
+        context: Context | None = None,  # noqa: ARG002
     ) -> dict | None:
         """Post-process a record with attributes."""
         attributes = row.pop("attributes", {})
