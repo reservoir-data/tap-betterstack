@@ -22,6 +22,8 @@ TestTapBetterStack = get_tap_test_class(
             "email_integrations",
             "incoming_webhooks",
             "status_pages",
+            "incident_events",
+            "incidents",
         ],
     ),
 )
