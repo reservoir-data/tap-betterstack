@@ -1,7 +1,7 @@
 [build-system]
 build-backend = "poetry_dynamic_versioning.backend"
 requires = [
-  "poetry-core~=1.9.1",
+  "poetry-core",
   "poetry-dynamic-versioning",
 ]
 
@@ -106,7 +106,6 @@ max_supported_python = "3.13"
 addopts = "-vvv"
 
 [tool.mypy]
-python_version = "3.12"
 warn_redundant_casts = true
 warn_unused_configs = true
 warn_unused_ignores = true
