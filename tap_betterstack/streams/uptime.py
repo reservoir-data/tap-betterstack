@@ -15,14 +15,14 @@ if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 __all__ = [
-    "Monitors",
-    "MonitorGroups",
-    "Heartbeats",
-    "HeartbeatGroups",
-    "OnCalls",
     "EscalationPolicies",
-    "Incidents",
+    "HeartbeatGroups",
+    "Heartbeats",
     "IncidentTimelineEvents",
+    "Incidents",
+    "MonitorGroups",
+    "Monitors",
+    "OnCalls",
 ]
 
 Rule = th.ObjectType(
