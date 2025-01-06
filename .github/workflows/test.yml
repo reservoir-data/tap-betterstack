@@ -34,11 +34,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      FORCE_COLOR: "1"
-      NOXPYTHON: ${{ matrix.python-version }}
+      NOXFORCEPYTHON: ${{ matrix.python-version }}
       NOXSESSION: tests
       PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
+      PYO3_USE_ABI3_FORWARD_COMPATIBILITY: "1"
     strategy:
+      fail-fast: false
+      max-parallel: 2
       matrix:
         python-version:
         - "3.9"
@@ -64,6 +66,7 @@ jobs:
     - name: Install Poetry
       run: |
         pipx install poetry
+        pipx inject poetry poetry-plugin-export
         poetry --version
         poetry self show plugins
 
@@ -82,12 +85,16 @@ jobs:
 
   typing:
     runs-on: ubuntu-latest
+    env:
+      NOXSESSION: mypy
+      PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v5
+      id: setup-python
       with:
         python-version: "3.x"
         cache: pip
@@ -100,16 +107,17 @@ jobs:
 
     - name: Install Poetry
       run: |
-        pipx install poetry
+        pipx install poetry --python ${{ steps.setup-python.outputs.python-path }}
+        pipx inject poetry poetry-plugin-export
         poetry --version
         poetry self show plugins
 
     - name: Install Nox
       run: |
-        pipx install nox
+        pipx install nox --python ${{ steps.setup-python.outputs.python-path }}
         pipx inject nox nox-poetry
         nox --version
 
     - name: Run typing checks
       run: |
-        nox --verbose -s mypy
+        nox --verbose
