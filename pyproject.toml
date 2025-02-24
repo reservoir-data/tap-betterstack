@@ -5,34 +5,47 @@ requires = [
   "poetry-dynamic-versioning==1.7.1",
 ]
 
-[tool.poetry]
+[project]
 name = "tap-betterstack"
-version = "0.0.0"
 description = "Singer tap for Better Stack, built with the Meltano SDK for Singer Taps."
-authors = [
-  "Edgar Ramírez-Mondragón <edgarrm358@gmail.com>",
+readme = "README.md"
+keywords = [
+  "Better Stack",
+  "ELT",
+  "singer.io",
 ]
+license = "Apache-2.0"
+license-files = [ "LICENSE" ]
+authors = [ { name = "Edgar Ramírez-Mondragón", email = "edgarrm358@gmail.com" } ]
+requires-python = ">=3.9"
 classifiers = [
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
 ]
-keywords = [
-  "ELT",
-  "singer.io",
-  "Better Stack",
+dynamic = [
+  "version",
 ]
-license = "Apache-2.0"
-readme = "README.md"
-homepage = "https://github.com/edgarrmondragon/tap-betterstack"
-repository = "https://github.com/edgarrmondragon/tap-betterstack"
-documentation = "https://github.com/edgarrmondragon/tap-betterstack#readme"
+dependencies = [
+  "singer-sdk~=0.44.2",
+]
+urls.Documentation = "https://github.com/edgarrmondragon/tap-betterstack#readme"
+urls.Homepage = "https://github.com/edgarrmondragon/tap-betterstack"
+urls.Repository = "https://github.com/edgarrmondragon/tap-betterstack"
+scripts."tap-betterstack" = "tap_betterstack.tap:TapBetterStack.cli"
 
-[tool.poetry.dependencies]
-python = ">=3.9"
-singer-sdk = "~=0.44.2"
+[tool.poetry]
+requires-poetry = ">=2.0"
+version = "0.0.0"
+
+[tool.poetry.requires-plugins]
+poetry-dynamic-versioning = { version = ">=1.0.0,<2.0.0", extras = [ "plugin" ] }
+poetry-plugin-export = ">=1.8"
 
 [tool.poetry.group.dev.dependencies]
 mypy = ">=1.11.1"
@@ -40,10 +53,6 @@ singer-sdk = { version = "*", extras = [
   "testing",
 ] }
 types-requests = "*"
-
-[tool.poetry.scripts]
-# CLI declaration
-"tap-betterstack" = "tap_betterstack.tap:TapBetterStack.cli"
 
 [tool.poetry-dynamic-versioning]
 enable = true
@@ -61,8 +70,6 @@ style = "pep440"
 vcs = "git"
 
 [tool.ruff]
-target-version = "py39"
-
 line-length = 88
 src = [
   "tap_betterstack",
@@ -98,7 +105,7 @@ lint.isort.required-imports = [
 lint.pydocstyle.convention = "google"
 
 [tool.pyproject-fmt]
-max_supported_python = "3.13"
+max_supported_python = "3.14"
 
 [tool.pytest.ini_options]
 addopts = "-vvv"
