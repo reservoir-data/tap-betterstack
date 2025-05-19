@@ -32,7 +32,7 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "singer-sdk~=0.45.4",
+  "singer-sdk~=0.46.0",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-betterstack#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-betterstack"
