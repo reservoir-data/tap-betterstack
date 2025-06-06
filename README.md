@@ -87,8 +87,8 @@ tap-betterstack --config CONFIG --discover > ./catalog.json
 ### Initialize your Development Environment
 
 ```bash
-pipx install poetry
-poetry install
+curl -LsSf https://astral.sh/uv/install.sh | sh  # or see https://docs.astral.sh/uv/getting-started/installation/
+uv sync
 ```
 
 ### Create and Run Tests
@@ -96,13 +96,13 @@ poetry install
 Create tests within the `tests` subfolder and then run:
 
 ```bash
-poetry run pytest
+uv run pytest
 ```
 
-You can also test the `tap-betterstack` CLI interface directly using `poetry run`:
+You can also test the `tap-betterstack` CLI interface directly using the virtual environment:
 
 ```bash
-poetry run tap-betterstack --help
+uv run tap-betterstack --help
 ```
 
 ### Testing with [Meltano](https://www.meltano.com)
@@ -117,7 +117,7 @@ Next, install Meltano (if you haven't already) and any needed plugins:
 
 ```bash
 # Install meltano
-pipx install meltano
+uv tool install meltano
 # Initialize meltano within this directory
 cd tap-betterstack
 meltano install
@@ -129,7 +129,7 @@ Now you can test and orchestrate using Meltano:
 # Test invocation:
 meltano invoke tap-betterstack --version
 # OR run a test `elt` pipeline:
-meltano elt tap-betterstack target-jsonl
+meltano run tap-betterstack target-jsonl
 ```
 
 ### SDK Dev Guide
