@@ -38,9 +38,9 @@ dynamic = [
 dependencies = [
   "singer-sdk~=0.48.0",
 ]
-urls.Documentation = "https://github.com/edgarrmondragon/tap-betterstack#readme"
-urls.Homepage = "https://github.com/edgarrmondragon/tap-betterstack"
-urls.Repository = "https://github.com/edgarrmondragon/tap-betterstack"
+urls.Documentation = "https://github.com/reservoir-data/tap-betterstack#readme"
+urls.Homepage = "https://github.com/reservoir-data/tap-betterstack"
+urls.Repository = "https://github.com/reservoir-data/tap-betterstack"
 scripts.tap-betterstack = "tap_betterstack.tap:TapBetterStack.cli"
 
 [dependency-groups]
