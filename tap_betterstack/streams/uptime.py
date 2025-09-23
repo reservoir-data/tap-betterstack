@@ -2,12 +2,18 @@
 
 from __future__ import annotations
 
+import sys
 from typing import TYPE_CHECKING, Any
 
 from singer_sdk import typing as th
 from singer_sdk.helpers._typing import TypeConformanceLevel
 
 from tap_betterstack.client import BetterStackStream
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 if TYPE_CHECKING:
     from urllib.parse import ParseResult
@@ -284,6 +290,7 @@ class Incidents(BaseUptimeStream):
         ),
     ).to_dict()
 
+    @override
     def get_url_params(
         self,
         context: Context | None,
@@ -298,11 +305,8 @@ class Incidents(BaseUptimeStream):
             params["from"] = starting_timestamp
         return params
 
-    def get_child_context(
-        self,
-        record: dict,
-        context: Context | None,  # noqa: ARG002
-    ) -> dict | None:
+    @override
+    def get_child_context(self, record: dict, context: Context | None) -> dict | None:
         """Return a child context for the given record."""
         return {"incident_id": record["id"]}
 

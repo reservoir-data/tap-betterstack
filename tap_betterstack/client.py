@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sys
 from abc import ABCMeta, abstractmethod
 from typing import TYPE_CHECKING, Any, ClassVar
 from urllib.parse import parse_qsl
@@ -10,6 +11,11 @@ from singer_sdk import RESTStream
 from singer_sdk.authenticators import BearerTokenAuthenticator
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator, BaseHATEOASPaginator
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
 
 if TYPE_CHECKING:
     from urllib.parse import ParseResult
@@ -21,6 +27,7 @@ if TYPE_CHECKING:
 class BetterStackPaginator(BaseHATEOASPaginator):
     """Better Stack paginator class."""
 
+    @override
     def get_next_url(self, response: Response) -> str | None:
         """Return the next page URL from the response."""
         data = response.json()
@@ -41,51 +48,28 @@ class BetterStackStream(RESTStream, metaclass=ABCMeta):
         raise NotImplementedError
 
     @property
+    @override
     def authenticator(self) -> BearerTokenAuthenticator:
-        """Get an authenticator object.
+        return BearerTokenAuthenticator(token=self.config["token"])
 
-        Returns:
-            The authenticator instance for this REST stream.
-        """
-        token: str = self.config["token"]
-        return BearerTokenAuthenticator.create_for_stream(
-            self,
-            token=token,
-        )
-
-    @property
-    def http_headers(self) -> dict:
-        """Return the http headers needed.
-
-        Returns:
-            A dictionary of HTTP headers.
-        """
-        return {"User-Agent": f"{self.tap_name}/{self._tap.plugin_version}"}
-
+    @override
     def get_new_paginator(self) -> BaseAPIPaginator:
         """Get a new paginator object."""
         return BetterStackPaginator()
 
+    @override
     def get_url_params(
         self,
-        context: Context | None,  # noqa: ARG002
+        context: Context | None,
         next_page_token: ParseResult | None,
     ) -> dict[str, Any]:
-        """Get URL query parameters.
-
-        Args:
-            context: Stream sync context.
-            next_page_token: Next offset.
-
-        Returns:
-            Mapping of URL query parameters.
-        """
         return dict(parse_qsl(next_page_token.query)) if next_page_token else {}
 
+    @override
     def post_process(
         self,
         row: dict,
-        context: Context | None = None,  # noqa: ARG002
+        context: Context | None = None,
     ) -> dict | None:
         """Post-process a record with attributes."""
         attributes = row.pop("attributes", {})
