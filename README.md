@@ -110,26 +110,11 @@ uv run tap-betterstack --help
 _**Note:** This tap will work in any Singer environment and does not require Meltano.
 Examples here are for convenience and to streamline end-to-end orchestration scenarios._
 
-Your project comes with a custom `meltano.yml` project file already created. Open the `meltano.yml` and follow any _"TODO"_ items listed in
-the file.
-
-Next, install Meltano (if you haven't already) and any needed plugins:
+Use Meltano to run an EL pipeline:
 
 ```bash
-# Install meltano
-uv tool install meltano
-# Initialize meltano within this directory
-cd tap-betterstack
-meltano install
-```
-
-Now you can test and orchestrate using Meltano:
-
-```bash
-# Test invocation:
-meltano invoke tap-betterstack --version
-# OR run a test `elt` pipeline:
-meltano run tap-betterstack target-jsonl
+uvx meltano invoke tap-betterstack --version
+uvx meltano run tap-betterstack target-jsonl
 ```
 
 ### SDK Dev Guide
