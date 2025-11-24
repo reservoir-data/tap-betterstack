@@ -101,10 +101,10 @@ class Monitors(BaseUptimeStream):
         th.Property("attributes__updated_at", th.DateTimeType),
         th.Property("attributes__ssl_expiration", th.IntegerType),
         th.Property("attributes__domain_expiration", th.IntegerType),
-        th.Property("attributes__regions", th.ArrayType(th.StringType)),
+        th.Property("attributes__regions", th.ArrayType(th.StringType)),  # ty: ignore[invalid-argument-type]
         th.Property("attributes__port", th.StringType),
         th.Property("attributes__confirmation_period", th.IntegerType),
-        th.Property("attributes__expected_status_codes", th.ArrayType(th.IntegerType)),
+        th.Property("attributes__expected_status_codes", th.ArrayType(th.IntegerType)),  # ty: ignore[invalid-argument-type]
         th.Property("attributes__policy_id", th.StringType),
         th.Property("attributes__follow_redirects", th.BooleanType),
         th.Property("attributes__remember_cookies", th.BooleanType),
@@ -227,7 +227,7 @@ class EscalationPolicies(BaseUptimeStream):
                     th.Property("wait_before", th.IntegerType),
                     th.Property("urgency_id", th.IntegerType),
                     th.Property("timezone", th.StringType),
-                    th.Property("days", th.ArrayType(th.StringType)),
+                    th.Property("days", th.ArrayType(th.StringType)),  # ty: ignore[invalid-argument-type]
                     th.Property("time_from", th.StringType),
                     th.Property("time_to", th.StringType),
                     th.Property("policy_id", th.StringType),
@@ -262,7 +262,7 @@ class Incidents(BaseUptimeStream):
         th.Property("attributes__resolved_by", th.StringType),
         th.Property("attributes__response_content", th.StringType),
         th.Property("attributes__response_options", th.StringType),
-        th.Property("attributes__regions", th.ArrayType(th.StringType)),
+        th.Property("attributes__regions", th.ArrayType(th.StringType)),  # ty: ignore[invalid-argument-type]
         th.Property("attributes__response_url", th.StringType),
         th.Property("attributes__screenshot_url", th.StringType),
         th.Property("attributes__origin_url", th.StringType),
