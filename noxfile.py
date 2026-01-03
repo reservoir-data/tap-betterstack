@@ -1,3 +1,9 @@
+#!/usr/bin/env -S uv run --script
+
+# /// script
+# dependencies = ["nox"]
+# ///
+
 """Nox configuration."""
 
 from __future__ import annotations
@@ -8,8 +14,8 @@ PYPROJECT = nox.project.load_toml("pyproject.toml")
 PYTHON_VERSIONS = nox.project.python_versions(PYPROJECT)
 
 nox.needs_version = ">=2025.2.9"
-nox.options.sessions = ("tests",)
 nox.options.default_venv_backend = "uv"
+nox.options.reuse_venv = "yes"
 
 UV_SYNC_COMMAND = (
     "uv",
@@ -38,7 +44,7 @@ def tests(session: nox.Session) -> None:
 
 
 @nox.session()
-def mypy(session: nox.Session) -> None:
+def typing(session: nox.Session) -> None:
     """Check types."""
     env = {
         "UV_PROJECT_ENVIRONMENT": session.virtualenv.location,
@@ -55,3 +61,7 @@ def mypy(session: nox.Session) -> None:
     args = session.posargs or ("tap_betterstack", "tests")
     session.run("mypy", *args)
     session.run("ty", "check", *args)
+
+
+if __name__ == "__main__":
+    nox.main()
