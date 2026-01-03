@@ -37,6 +37,7 @@ env:
 
 jobs:
   test:
+    name: Integration
     runs-on: ubuntu-24.04
     env:
       NOXFORCEPYTHON: ${{ matrix.python-version }}
@@ -47,7 +48,6 @@ jobs:
       max-parallel: 1
       matrix:
         python-version:
-        - "3.11"
         - "3.12"
         - "3.13"
         - "3.14"
@@ -69,9 +69,10 @@ jobs:
         nox --verbose
 
   typing:
+    name: Type Checks
     runs-on: ubuntu-24.04
     env:
-      NOXSESSION: mypy
+      NOXSESSION: typing
     steps:
     - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
     - uses: astral-sh/setup-uv@1e862dfacbd1d6d858c55d9b792c756523627244 # v7.1.4

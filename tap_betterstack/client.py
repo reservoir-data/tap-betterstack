@@ -2,26 +2,18 @@
 
 from __future__ import annotations
 
-import sys
 from abc import ABCMeta, abstractmethod
-from typing import TYPE_CHECKING, Any, ClassVar
-from urllib.parse import parse_qsl
+from typing import TYPE_CHECKING, Any, ClassVar, override
+from urllib.parse import ParseResult, parse_qsl
 
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BearerTokenAuthenticator
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.pagination import BaseAPIPaginator, BaseHATEOASPaginator
 
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
-
 if TYPE_CHECKING:
-    from urllib.parse import ParseResult
-
     from requests import Response
-    from singer_sdk.helpers.types import Context
+    from singer_sdk.helpers.types import Context, Record
 
 
 class BetterStackPaginator(BaseHATEOASPaginator):
@@ -34,7 +26,7 @@ class BetterStackPaginator(BaseHATEOASPaginator):
         return next(extract_jsonpath("$.pagination.next", data), None)
 
 
-class BetterStackStream(RESTStream, metaclass=ABCMeta):
+class BetterStackStream(RESTStream[ParseResult], metaclass=ABCMeta):
     """Better Stack stream class."""
 
     records_jsonpath = "$.data[*]"  # Or override `parse_response`.
@@ -53,7 +45,7 @@ class BetterStackStream(RESTStream, metaclass=ABCMeta):
         return BearerTokenAuthenticator(token=self.config["token"])
 
     @override
-    def get_new_paginator(self) -> BaseAPIPaginator:
+    def get_new_paginator(self) -> BaseAPIPaginator[ParseResult | None]:
         """Get a new paginator object."""
         return BetterStackPaginator()
 
@@ -68,9 +60,9 @@ class BetterStackStream(RESTStream, metaclass=ABCMeta):
     @override
     def post_process(
         self,
-        row: dict,
+        row: Record,
         context: Context | None = None,
-    ) -> dict | None:
+    ) -> Record | None:
         """Post-process a record with attributes."""
         attributes = row.pop("attributes", {})
         for key, value in attributes.items():

@@ -2,23 +2,17 @@
 
 from __future__ import annotations
 
-import sys
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk import typing as th
 from singer_sdk.helpers._typing import TypeConformanceLevel
 
 from tap_betterstack.client import BetterStackStream
 
-if sys.version_info >= (3, 12):
-    from typing import override
-else:
-    from typing_extensions import override
-
 if TYPE_CHECKING:
     from urllib.parse import ParseResult
 
-    from singer_sdk.helpers.types import Context
+    from singer_sdk.helpers.types import Context, Record
 
 __all__ = [
     "EscalationPolicies",
@@ -306,7 +300,11 @@ class Incidents(BaseUptimeStream):
         return params
 
     @override
-    def get_child_context(self, record: dict, context: Context | None) -> dict | None:
+    def get_child_context(
+        self,
+        record: Record,
+        context: Context | None,
+    ) -> Record | None:
         """Return a child context for the given record."""
         return {"incident_id": record["id"]}
 
