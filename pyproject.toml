@@ -52,19 +52,16 @@ testing = [
   "singer-sdk[testing]",
 ]
 typing = [
-  "mypy>=1.11.1",
-  "ty>=0.0.1a21",
+  "mypy>=1.19.1",
+  "ty>=0.0.19",
   "types-requests",
 ]
 
 [tool.hatch.version]
 source = "vcs"
 
-[tool.uv.sources]
-singer-sdk = { git = "https://github.com/meltano/sdk.git", rev = "main" }
-
 [tool.ruff]
-required-version = ">=0.14"
+required-version = ">=0.15"
 line-length = 88
 lint.select = [
   "ALL",
