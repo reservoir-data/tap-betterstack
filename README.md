@@ -23,25 +23,25 @@ Singer tap for [Better Stack](https://betterstack.com). Built with the [Meltano 
 
 ## Capabilities
 
-* `catalog`
-* `state`
-* `discover`
-* `about`
-* `stream-maps`
-* `schema-flattening`
-* `batch`
+- `catalog`
+- `state`
+- `discover`
+- `about`
+- `stream-maps`
+- `schema-flattening`
+- `batch`
 
 ## Settings
 
-| Setting             | Required | Default | Description |
+| Setting | Required | Default | Description |
 |:--------------------|:--------:|:-------:|:------------|
-| token               | True     | None    | API Token for Better Stack |
-| start_date          | False    | None    | Earliest datetime to get data from |
-| stream_maps         | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
-| stream_map_config   | False    | None    | User-defined config values to be used within map expressions. |
-| flattening_enabled  | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
-| flattening_max_depth| False    | None    | The max depth to flatten schemas. |
-| batch_config        | False    | None    |             |
+| token | True | None | API Token for Better Stack |
+| start_date | False | None | Earliest datetime to get data from |
+| stream_maps | False | None | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
+| stream_map_config | False | None | User-defined config values to be used within map expressions. |
+| flattening_enabled | False | None | 'True' to enable schema flattening and automatically expand nested properties. |
+| flattening_max_depth| False | None | The max depth to flatten schemas. |
+| batch_config | False | None | |
 
 A full list of supported settings and capabilities is available by running: `tap-betterstack --about`
 
@@ -49,24 +49,24 @@ A full list of supported settings and capabilities is available by running: `tap
 
 ### Supported
 
-* [`monitors`](https://betterstack.com/docs/uptime/api/list-all-existing-monitors/)
-* [`monitor_groups`](https://betterstack.com/docs/uptime/api/list-all-existing-monitor-groups/)
-* [`heartbeats`](https://betterstack.com/docs/uptime/api/list-all-existing-hearbeats/)
-* [`heartbeat_groups`](https://betterstack.com/docs/uptime/api/list-all-existing-heartbeat-groups/)
-* [`on_calls`](https://betterstack.com/docs/uptime/api/list-all-existing-on-call-calendars/)
-* [`escalation_policies`](https://betterstack.com/docs/uptime/api/list-all-escalation-policies/)
-* [`incidents`](https://betterstack.com/docs/uptime/api/list-all-incidents/)
-* [`incident_events`](https://betterstack.com/docs/uptime/api/list-of-incident-timeline-events/)
-* [`email_integrations`](https://betterstack.com/docs/uptime/api/list-all-email-integrations/)
-* [`incoming_webhooks`](https://betterstack.com/docs/uptime/api/list-all-incoming-webhooks/)
-* [`status_pages`](https://betterstack.com/docs/uptime/api/list-all-existing-status-pages/)
+- [`monitors`](https://betterstack.com/docs/uptime/api/list-all-existing-monitors/)
+- [`monitor_groups`](https://betterstack.com/docs/uptime/api/list-all-existing-monitor-groups/)
+- [`heartbeats`](https://betterstack.com/docs/uptime/api/list-all-existing-hearbeats/)
+- [`heartbeat_groups`](https://betterstack.com/docs/uptime/api/list-all-existing-heartbeat-groups/)
+- [`on_calls`](https://betterstack.com/docs/uptime/api/list-all-existing-on-call-calendars/)
+- [`escalation_policies`](https://betterstack.com/docs/uptime/api/list-all-escalation-policies/)
+- [`incidents`](https://betterstack.com/docs/uptime/api/list-all-incidents/)
+- [`incident_events`](https://betterstack.com/docs/uptime/api/list-of-incident-timeline-events/)
+- [`email_integrations`](https://betterstack.com/docs/uptime/api/list-all-email-integrations/)
+- [`incoming_webhooks`](https://betterstack.com/docs/uptime/api/list-all-incoming-webhooks/)
+- [`status_pages`](https://betterstack.com/docs/uptime/api/list-all-existing-status-pages/)
 
 ### Planned (PRs welcome!)
 
-* [`status_page_sections`](https://betterstack.com/docs/uptime/api/list-existing-sections-of-a-status-page/)
-* [`status_page_resources`](https://betterstack.com/docs/uptime/api/list-existing-resources-of-a-status-page/)
-* [`status_page_reports`](https://betterstack.com/docs/uptime/api/list-existing-reports-on-a-status-page/)
-* [`status_page_report_updates`](https://betterstack.com/docs/uptime/api/list-all-existing-status-updates-for-a-status-page-report/)
+- [`status_page_sections`](https://betterstack.com/docs/uptime/api/list-existing-sections-of-a-status-page/)
+- [`status_page_resources`](https://betterstack.com/docs/uptime/api/list-existing-resources-of-a-status-page/)
+- [`status_page_reports`](https://betterstack.com/docs/uptime/api/list-existing-reports-on-a-status-page/)
+- [`status_page_report_updates`](https://betterstack.com/docs/uptime/api/list-all-existing-status-updates-for-a-status-page-report/)
 
 ## Usage
 
