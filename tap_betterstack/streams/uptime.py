@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, override
 
 from singer_sdk import typing as th
-from singer_sdk.helpers._typing import TypeConformanceLevel
+from singer_sdk.helpers.conform import TypeConformanceLevel
 
 from tap_betterstack.client import BetterStackStream
 
