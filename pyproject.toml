@@ -15,9 +15,6 @@ keywords = [
   "singer.io",
 ]
 license = "Apache-2.0"
-license-files = [
-  "LICENSE",
-]
 requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
@@ -29,7 +26,7 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "singer-sdk~=0.54.0a4",
+  "singer-sdk~=0.54.4",
 ]
 [[project.authors]]
 name = "Edgar Ramírez-Mondragón"
@@ -43,6 +40,7 @@ Repository = "https://github.com/reservoir-data/tap-betterstack"
 
 [dependency-groups]
 dev = [
+  "deptry>=0.25.1",
   { include-group = "testing" },
   { include-group = "typing" },
 ]
@@ -50,18 +48,19 @@ ci = [
   "pytest-github-actions-annotate-failures>=0.3",
 ]
 testing = [
-  "deptry>=0.12",
   "singer-sdk[testing]",
 ]
 typing = [
-  "mypy>=1.19.1",
-  "ty>=0.0.19",
-  "types-requests",
+  "mypy>=2.1",
+  "ty>=0.0.40",
 ]
 
-[tool.hatch]
 [tool.hatch.version]
+fallback-version = "0.0.0.dev0"
 source = "vcs"
+
+[tool.uv]
+required-version = ">=0.11"
 
 [tool.ruff]
 required-version = ">=0.15"
@@ -86,41 +85,49 @@ unfixable = [
   "ERA001", # commented-out-code
 ]
 flake8-annotations.allow-star-arg-any = true
-isort.required-imports = [
-  "from __future__ import annotations",
-]
 pydocstyle.convention = "google"
 
 [tool.pyproject-fmt]
 table_format = "long"
 
+[tool.mypy]
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_return_any = true
+warn_unreachable = true
+enable_error_code = [ "ignore-without-code", "redundant-expr", "truthy-bool" ]
+strict = true
+warn_unused_configs = true
+
 [tool.pytest]
 addopts = [
-  "-vvv",
-  "--strict-config",
-  "--strict-markers",
+  "-v",
   "-ra",
 ]
 filterwarnings = [ "error" ]
 log_level = "INFO"
 minversion = "9"
+strict = true
 testpaths = [ "tests" ]
-xfail_strict = true
 
 [tool.tox]
 min_version = "4.43"
-requires = [ "tox", "tox-uv" ]
+requires = [
+  "tox>=4.55",
+  "tox-uv>=1.35",
+]
 env_list = [
   "dependencies",
   "typing",
-  { product = [
-    { prefix = "3.", start = 12 },
-  ] },
+  { prefix = "3.", start = 12 },
 ]
 [tool.tox.env.dependencies]
-dependency_groups = [ "testing" ]
+description = "check for unused, missing and transitive dependencies"
+dependency_groups = [ "dev" ]
 commands = [ [ "deptry", "." ] ]
 [tool.tox.env.typing]
+description = "type checks"
 dependency_groups = [ "testing", "typing" ]
 commands = [
   [ "mypy", { replace = "posargs", default = [ "tap_betterstack", "tests" ], extend = true } ],
@@ -129,15 +136,8 @@ commands = [
 
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
-pass_env = [ "TAP_BETTERSTACK_*" ]
+description = "run unit tests on Python {py_dot_ver}"
 dependency_groups = [ "testing" ]
+pass_env = [ "TAP_BETTERSTACK_*" ]
 commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
-
-[tool.mypy]
-enable_error_code = [ "ignore-without-code", "redundant-expr", "truthy-bool" ]
-strict = true
-warn_no_return = true
-warn_redundant_casts = true
-warn_unreachable = true
-warn_unused_configs = true
-warn_unused_ignores = true
+base_python_file = [ ".python-version" ]
